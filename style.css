@@ -1,0 +1,149 @@
+h1
+{
+	font-size:48px
+}
+
+h3{
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+p
+{
+	line-height:1
+}
+
+pre{
+	width:60%;
+	margin:auto;
+	background-color: rgba(193, 193, 193, 0.7);
+	padding:12px 12px 12px 12px;
+	border: 2px dashed #000000;
+}
+
+textarea
+{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	width:60%
+}
+
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('data/IBMPlexSansJP-Regular.woff2') format('woff');
+}
+
+body
+{
+	background:#E6E6FA;
+	font-family:MyWebFont;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	width:1200px
+}
+
+.menu ul
+{
+	padding:0;
+	position:relative;
+	width:100%
+}
+
+.menu li
+{
+	background:#FFF0F5;
+	border-left:solid 6px #FF8C00;
+	color:#000;
+	line-height:2;
+	list-style-type:none;
+	margin-bottom:5px;
+	padding:1em;
+	width:100%
+}
+
+.text-right
+{
+	text-align:right
+}
+
+#bottom
+{
+	clear:both;
+	margin-bottom:20px;
+	margin-left:auto;
+	margin-right:auto;
+	width:100%
+}
+
+#content
+{
+	clear:both;
+	margin-top:20px;
+	width:100%
+}
+
+.layout_h
+{
+	display:inline-block;
+	margin:auto;
+	vertical-align:middle
+}
+
+.content-layout
+{
+	display:inline-block;
+	margin:auto auto auto 10px;
+	vertical-align:middle
+}
+
+.content-layout-text
+{	
+	vertical-align:center;
+	height:160px;
+	width:80%
+}
+
+.content-layout-date
+{
+	font-size:10px
+}
+
+footer
+{
+	clear:both;
+	margin-top:10px
+}
+
+.article h2
+{
+	padding:0.25em 0;
+	position:relative
+}
+
+.article h2:after
+{
+	background:linear-gradient(to right, #ff0000, #ffb2b2);
+	content:"";
+	display:block;
+	height:4px;
+	width:20%
+}
+
+.layout_h_main
+{
+	margin-left:10%;
+	width:30%
+}
+
+.layout_h_desc
+{
+	width:50%
+}
+
+.text-center,div.title
+{
+	text-align:center
+}
+

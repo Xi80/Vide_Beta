@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+	<meta name="twitter:card" content="summary_card" />
+	<meta name="twitter:site" content="@LunaTsukinashi" />
+	<meta property="og:url" content="vide.c0ntra1l.xyz" />
+	<meta property="og:title" content="Z80でのリングバッファの実装" />
+	<meta property="og:description" content="アセンブラでリングバッファを実装しました．" /> <!--?-->
+	<meta property="og:image" content="imgs/vide.jpg" />
+	<meta charset="shift_jis">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../../style.css">
+	<title>リングバッファ</title>
+</head>
+
+<body>
+<a href="../../archive.html">戻る</a>
+
+<div id="top">
+  <h1 class="left">Z80でのリングバッファの実装</h1>
+  <div class="right">
+    <p>Z80でリングバッファを実装してみました．</p>
+    <p class="text-right">作成:2021.07.26</p>
+    <p class="text-right">更新:2021.07.26</p>
+  </div>
+</div>
+
+<div id="content" class="article">
+  <hr>
+
+  <h2>概要</h2>
+  <p>リングバッファはFig1.の示すようなリング状のバッファです．</p>
+  <figure class="text-center">
+    <img src="circularbuffer.png" width="320" height="320" alt="test picture">
+    <figcaption>Fig1.リングバッファの概念図</figcaption>
+  </figure>
+  <p>実際の実装では物理的にリング状に配置するのは不可能なのでインデックスをバッファのサイズで割ったあまりを使ってアクセスします．</p>
+  <p>割った余りを実際に求めるのは除算器のないZ80には重い作業なので，「端に到達したらインデックスを0に戻す」という処理でリング状にしています．</p>
+
+  <h2>コード</h2>
+  <pre>
+BUFFER_SIZE	EQU	80H			;バッファーのサイズはここで指定
+		ORG	5000H
+;バッファーの初期化
+;引数:	なし
+;破壊:	なし
+INIT_BUFFER:	PUSH	AF			;レジスタの退避
+		PUSH	BC
+		PUSH	DE
+		PUSH	HL
+		;
+		XOR	A			;ポインタの初期化
+		LD	(BUFFER_READ),A
+		LD	(BUFFER_WRITE),A
+		LD	(BUFFER_LENGTH),A
+		;
+		LD	HL,BUFFER		;バッファー領域の初期化
+		LD	DE,BUFFER+1
+		LD	BC,BUFFER_SIZE-1
+		LD	A,00H
+		LD	(HL),A
+		LDIR
+		;
+		POP	HL			;レジスタの復帰
+		POP	DE
+		POP	BC
+		POP	AF
+		RET
+;
+;バッファーへのデータ追加
+;引数:		D	追加するデータ
+;破壊:		A,F
+;返り値:	Z	T:失敗(空きがない)
+;			F:成功
+SET_BUFFER:	PUSH	BC			;レジスタの退避
+		PUSH	HL
+		;
+		LD	A,(BUFFER_LENGTH)	;バッファーに空きがあるか調べる
+		LD	B,BUFFER_SIZE
+		XOR	B
+		JP	NZ,SET_BUFFER1
+		POP	HL
+		POP	BC
+		RET
+		;
+SET_BUFFER1:	LD	HL,BUFFER		;アドレス算出
+		LD	B,0
+		LD	A,(BUFFER_WRITE)
+		LD	C,A
+		ADD	HL,BC
+		;
+		LD	(HL),D			;データの追加
+		;
+		LD	A,(BUFFER_LENGTH)	;BUFFER_LENGTH++
+		INC	A
+		LD	(BUFFER_LENGTH),A
+		;
+		INC	C			;BUFFER_WRITE++
+		LD	A,C
+		LD	(BUFFER_WRITE),A
+		;
+		LD	B,BUFFER_SIZE		;BUFFER_SIZE==BUFFER_WRITE?
+		XOR	B
+		POP	HL
+		POP	BC
+		RET	NZ			;BUFFER_SIZE!=BUFFER_WRITE
+		XOR	A			;BUFFER_WRITE=0
+		LD	(BUFFER_WRITE),A
+		INC	A			;Zフラグを消す
+		OR	A
+		RET
+;
+;バッファーからのデータの取り出し
+;引数:		なし
+;破壊:		A,F
+;返り値:	D	取り出したデータ
+;		Z	T	失敗(空)
+;			F	成功
+GET_BUFFER:	PUSH	BC			;レジスタの退避
+		PUSH	HL
+		;
+		LD	A,(BUFFER_LENGTH)	;データが入っているか調べる
+		LD	B,0
+		XOR	B
+		JP	NZ,GET_BUFFER1
+		POP	HL
+		POP	BC
+		RET
+		;
+GET_BUFFER1:	LD	HL,BUFFER		;アドレスの算出
+		LD	B,0
+		LD	A,(BUFFER_READ)
+		LD	C,A
+		ADD	HL,BC
+		;
+		LD	D,(HL)			;データの取り出し
+		;
+		LD	A,(BUFFER_LENGTH)	;BUFFER_LENGTH--
+		DEC	A
+		LD	(BUFFER_LENGTH),A
+		;
+		INC	C			;BUFFER_READ++
+		LD	A,C
+		LD	(BUFFER_READ),A
+		;
+		LD	B,BUFFER_SIZE		;BUFFER_SIZE==BUFFER_READ?
+		XOR	B
+		POP	HL
+		POP	BC
+		RET	NZ			;BUFFER_SIZE!=BUFFER_READ
+		XOR	A			;BUFFER_READ=0
+		LD	(BUFFER_READ),A
+		INC	A
+		OR	A
+		RET
+;RAM AREA
+		ORG	9000H
+BUFFER_READ:	DEFS	01H
+BUFFER_WRITE:	DEFS	01H
+BUFFER_LENGTH:	DEFS	01H
+BUFFER:		DEFS	80H
+  </pre>
+	<p class="text-center">Code1.リングバッファのソースコード</p>
+
+	<p>このようなコードになります．コメントを参考にしてください．</p>
+
+	<h2>実際の使用例</h2>
+	<p>テストに使用したコードを以下に示します．</p>
+	<pre>
+		ORG	0000H
+MAIN:		CALL	INIT_BUFFER
+		LD	B,4H
+LOOP1:		LD	D,B
+		CALL	SET_BUFFER
+		DJNZ	LOOP1
+		LD	B,5H
+LOOP2:		LD	D,00H
+		CALL	GET_BUFFER
+		DJNZ	LOOP2
+		HALT
+	</pre>
+	<p class="text-center">Code2.テストコード</p>
+	<p>4バイトを書き込んだうえで5バイトを読みだそうとしています．</p>
+	<p>この場合，5回目の読み出し時にはZフラグが立ったうえで00hが返されるため，バッファーが空であることを認識できます．</p>
+</div>
+
+<div class="bottom">
+
+</div>
+<footer>
+  <hr>
+  <!--フッタ-->
+  <p class="text-center">Copyright 2021 Luna Tsukinashi</p>
+</footer>
+<a href="../../archive.html">戻る</a>
+</body>
+</html>
