@@ -1,58 +1,90 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 	<head>
+		<!--Twitterカードの設定-->
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:site" content="@LunaTsukinashi" />
 		<meta property="og:url" content="vide.c0ntra1l.xyz" />
-		<meta property="og:title" content="Vide" />
-		<meta property="og:description" content="電子工作/プログラミング" />
-		<meta property="og:image" content="http://vide.c0ntra1l.xyz/imgs/vide.jpg" />
+		<meta property="og:title" content="Vide"/>
+		<meta property="og:description" content="電子工作/プログラミング"/>
+		<meta property="og:image" content="http://vide.c0ntra1l.xyz/imgs/vide.jpg"/>
+
+		<!--文字コードはSHIFT-JIS(旧環境での閲覧を想定)-->
 		<meta charset="shift_jis">
+
+		<!--フォントを読み込む(タイトル用，内製しても良いかも)-->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap&text=Vide"
+			  rel="stylesheet">
+
 		<link rel="stylesheet" type="text/css" href="style.css">
+
 		<title>Vide</title>
+
+		<!--タイトルロゴ用-->
+		<style>
+			h1.title-logo {
+				font-family: 'Cinzel Decorative', cursive;
+				font-size: 72px;
+			}
+
+			span.title-logo {
+				color: #e62000;
+			}
+
+			.layout_home {
+				display: inline-block;
+				vertical-align: center;
+				margin: auto;
+			}
+		</style>
 	</head>
 
 	<body>
-		<div id="top">
+	<!--ページ上部の要素-->
+	<div id="top">
 
 			<!--タイトルロゴなど-->
-			<div class="title">
-				<h1 style="font-family: 'Cinzel Decorative', cursive;font-size:72px;"><span style="color: #e62000; ">V</span>ide</h1>
-				<p>『Vide』へようこそ．</p>
-				<p>ここでは電子工作/プログラミングを主に取り扱っています．</p>
-				<p>Sorry! This website is Japanese Only.</p>
-			</div>
+		<div class="title">
+			<h1 class="title-logo"><span class="title-logo">V</span>ide</h1>
+			<p>『Vide』へようこそ．</p>
+			<p>ここでは電子工作/プログラミングを主に取り扱っています．</p>
+			<p>Sorry! This website is Japanese Only.</p>
+		</div>
+
 			<div class="text-right">
 				<p>since 2021.07.24</p>
 			</div>
+
 			<hr>
 
 		</div>
 
-		<div id="content">
+	<!--メインのコンテンツ-->
+	<div id="content">
 
-			<div class="layout_h">
-				<!--トップ画像-->
-				<img src="imgs/top.jpg" alt="top image" width="640" height="480">
-			</div>
+		<div class="layout_home">
+			<!--トップ画像-->
+			<img alt="top image" height="384" src="imgs/top.jpg" width="512">
+		</div>
 
-			<div class="top layout_h">
-				<!--メニュー-->
+		<div class="layout_home">
+			<!--メニュー-->
 
-				<ul class="menu" style="width:450px;">
-					<li>
-						<div id="elec">
-							<h3><a href="elec.html">電子工作</a></h3>
-							<p>制作したものの情報はココ<p>
-							<p class="text-right">LAST UPDATE 2021.07.26<p>
-						</div>
-					</li>
+			<ul class="menu" style="width:380px;">
+				<li>
+					<div id="elec">
+						<h3><a href="elec.html">電子工作</a></h3>
+						<p>制作したものの情報はココ
+						<p>
+						<p class="text-right">LAST UPDATE 2021.07.26
+						<p>
+					</div>
+				</li>
 
-					<li>
-						<div>
+				<li>
+					<div>
 							<h3><a href="archive.html">保管庫</a></h3>
 							<p>Z80やMC68000などの情報．</p>
 							<p>役に立たない知識などもここに．</p>
@@ -68,18 +100,17 @@
 						</div>
 					</li>
 					<!--
-                                        <li>
-                                            <div>
-                                                <h3><a href="aboutme.html">テスト</a></h3>
-                                                <p>そうだよ．きっと，</p>
-                                                <p>真のラスボスはあの人なんだよ．</p>
-                                                <p class="text-right">LAST UPDATE 2021.07.25<p>
-                                            </div>
-                                        </li>
+					<li>
+						<div>
+							<h3><a href="aboutme.html">テスト</a></h3>
+							<p>そうだよ．きっと，</p>
+							<p>真のラスボスはあの人なんだよ．</p>
+							<p class="text-right">LAST UPDATE 2021.07.25<p>
+						</div>
+					</li>
                     -->
 				</ul>
 			</div>
-
 		</div>
 
 		<div id="bottom">

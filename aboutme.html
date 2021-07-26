@@ -1,50 +1,71 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 	<head>
-		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="@LunaTsukinashi" />
-		<meta property="og:url" content="vide.c0ntra1l.xyz/aboutme.html" />
-		<meta property="og:title" content="About Me" />
-		<meta property="og:description" content="Lunaについて" /> <!--?-->
-		<meta property="og:image" content="imgs/vide.jpg" />
+		<!--Twitterカードの設定-->
+		<meta name="twitter:card" content="summary"/>
+		<meta name="twitter:site" content="@LunaTsukinashi"/>
+		<meta content="vide.c0ntra1l.xyz" property="og:url"/>
+		<meta content="Vide" property="og:title"/>
+		<meta content="電子工作/プログラミング" property="og:description"/>
+		<meta content="http://vide.c0ntra1l.xyz/imgs/vide.jpg" property="og:image"/>
+
+		<!--文字コードはSHIFT-JIS(旧環境での閲覧を想定)-->
 		<meta charset="shift_jis">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>Lunaについて</title>
+
+		<style>
+			.introduction {
+				display: inline-block;
+				vertical-align: middle;
+				margin-left: 5%;
+				margin-right: 5%;
+
+			}
+
+			#content {
+				height: 640px;
+				text-align: center;
+			}
+		</style>
 	</head>
 
 	<body>
-		<a href="index.html">戻る</a>
-		<div id="top">
-			<h1 class="layout_h layout_h_main">管理者について</h1>
-			<div class="layout_h text-right layout_h_desc">
-				<p>管理者であるLunaについてです．</p>
-				<p>いろいろやってますが何も分かって無いです．</p>
-			</div>
+	<a href="index.html">戻る</a>
+
+	<div id="top">
+		<h1 class="layout_top">管理者について</h1>
+		<div class="layout_top">
+			<p>管理者であるLunaについてです．</p>
+			<p>いろいろやってますが何も分かって無いです．</p>
 		</div>
-		<div id="bottom">
-			<hr>
-			<div class="content-layout">
-				<img src="imgs/icon.jpg" alt="my icon">
-			</div>
-			<div class="content-layout">
-				<h2>Luna Tsukinashi</h2>
-				<h4>職業</h4>
-					<p>電気科学生</p>
-				<h4>居住地</h4>
-					<p>本州の真ん中あたり．</p>
-					<p>可もなく不可もなくな環境です．</p>
-				<h4>趣味</h4>
-					<p>'90~'00年代ギャルゲー/電子工作/読書/コーヒー</p>
-				<h4>好きなもの</h4>
-					<p>Z80/MC68000/かつ丼/オムライス</p>
-				<h4>嫌いなもの</h4>
-					<p>PIC/キノコ類/部屋の片づけ</p>
-			</div>
+	</div>
+
+	<div id="content">
+		<hr>
+
+		<div class="introduction">
+			<img alt="my icon" height="400" src="imgs/icon.jpg" width="400">
 		</div>
-		<footer>
+
+		<div class="introduction">
+			<h2>Luna Tsukinashi</h2>
+			<h4>職業</h4>
+			<p>電気科学生</p>
+			<h4>居住地</h4>
+			<p>本州の真ん中あたり．</p>
+			<p>可もなく不可もなくな環境です．</p>
+			<h4>趣味</h4>
+			<p>'90~'00年代ギャルゲー/電子工作/読書/コーヒー</p>
+			<h4>好きなもの</h4>
+			<p>Z80/MC68000/かつ丼/オムライス</p>
+			<h4>嫌いなもの</h4>
+			<p>PIC/キノコ類/部屋の片づけ</p>
+		</div>
+		</div>
+
+	<footer>
 			<hr>
 			<!--フッタ-->
 			<p class="text-center">Copyright 2021 Luna Tsukinashi</p>
