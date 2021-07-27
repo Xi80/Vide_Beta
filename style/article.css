@@ -7,4 +7,5 @@ pre {
     tab-size:8;
     -moz-tab-size:8;
     font-family:monospace;
+    white-space:pre;
 }
