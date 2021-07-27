@@ -1,87 +1,75 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 <head>
-  <meta charset="shift_jis">
-  <link rel="stylesheet" type="text/css" href="style/common.css">
-  <title>�ۊǌ�</title>
+  <!--スタイルシートの読み込み-->
+  <link href="style/common.css" rel="stylesheet" type="text/css">
+  <!--<link href="style/topPage.css" rel="stylesheet" type="text/css">-->
+
+  <!--Twitterカードの設定-->
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:site" content="@LunaTsukinashi"/>
+  <meta property="og:url" content="vide.c0ntra1l.xyz/archive.html"/>
+  <meta property="og:title" content="Vide"/>
+  <meta property="og:description" content="電子工作/プログラミング"/>
+  <meta property="og:image" content="http://vide.c0ntra1l.xyz/imgs/vide.jpg"/>
+
+  <meta charset="utf-8">
+
+  <title>保管庫</title>
+
 </head>
 
 <body>
-<a href="index.html">�߂�</a>
-
+<!--ページ上部の要素-->
+<a href="index.html">戻る</a>
 <header>
-
-  <h1 class="layout_top">�ۊǌ�</h1>
-
+  <!--ここにヘッダを置く-->
+  <h1 class="layout_top">保管庫</h1>
   <div class="layout_top text-right">
-    <p>�K�v�ɂȂ����R�[�h����͂�����ɁD</p>
-    <p>�����̈����R�[�h���唼�Ȃ̂ŃA�e�ɂ͂Ȃ�Ȃ��Ǝv���܂��D</p>
+    <p>必要になったコードや情報はこちらに．</p>
+    <p>効率の悪いコードが大半なのでアテにはならないと思います．</p>
   </div>
 
 </header>
-<div id="content">
 
-  <hr>
+<!--メインのコンテンツ-->
+  <div id="content">
 
-  <ul class="menu">
+    <hr>
 
-    <li>
-      <img alt="test picture" class="content-layout" height="160" src="imgs/none.png" width="160">
-      <div class="content-layout">
-        <h3><a href="article/002/circularbuffer.html">Z80�ł̃����O�o�b�t�@�̎���</a></h3>
-        <p class="content-layout">2021.07.26</p>
-        <p>MIDI�f�[�^�̃o�b�t�@�����O�̂��߂Ƀ����O�o�b�t�@�������Ă݂܂����D</p>
-        <p>�A�Z���u���ł̃f�[�^�\���̎����͂�����Ƒ�ςł����D</p>
-      </div>
-    </li>
+    <ul class="menu">
 
-    <!--
-                    <li>
-                        <div class="content-layout"><img src="imgs/img01.jpg" width="160" height="160"></div>
-                        <div class="content-layout content-layout-text">
-                            <h3><a href="article/001/test.html">�e�X�g��i01</a></h3>
-                            <p class="content-layout-date">2021.07.24</p>
-                            <p>��������D�����ƁC�^�̃��X�{�X�͂��̐l�Ȃ񂾂�D</p>
-                            <p>�����ɐ�������u���D</p>
-                        </div>
-                    </li>
+      <li>
+        <img alt="test picture" class="content-layout" height="160" src="imgs/none.png" width="160">
+        <div class="content-layout">
+          <h3><a href="article/002/circularbuffer.html">Z80でのリングバッファの実装</a></h3>
+          <p class="content-layout">2021.07.26</p>
+          <p>MIDIデータのバッファリングのためにリングバッファを書いてみました．</p>
+          <p>アセンブラでのデータ構造の実装はちょっと大変でした．</p>
+        </div>
+      </li>
 
-                    <li>
-                        <div class="content-layout"><img src="imgs/img01.jpg" width="160" height="160"></div>
-                        <div class="content-layout content-layout-text">
-                            <h3><a href="article/article001.html">�e�X�g��i01</a></h3>
-                            <p class="content-layout-date">2021.07.24</p>
-                            <p>��������D�����ƁC�^�̃��X�{�X�͂��̐l�Ȃ񂾂�D</p>
-                            <p>�����ɐ�������u���D</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="content-layout"><img src="imgs/img01.jpg" width="160" height="160"></div>
-                        <div class="content-layout content-layout-text">
-                            <h3><a href="article/article001.html">�e�X�g��i01</a></h3>
-                            <p class="content-layout-date">2021.07.24</p>
-                            <p>��������D�����ƁC�^�̃��X�{�X�͂��̐l�Ȃ񂾂�D</p>
-                            <p>�����ɐ�������u���D</p>
-                        </div>
-
-                    </li>
-    -->
-  </ul>
-
-</div>
-
-<div id="bottom">
-  <!--�������ƂȂ�-->
+      <!--
+                      <li>
+                          <div class="content-layout"><img src="imgs/img01.jpg" width="160" height="160"></div>
+                          <div class="content-layout content-layout-text">
+                              <h3><a href="article/001/test.html">テスト作品01</a></h3>
+                              <p class="content-layout-date">2021.07.24</p>
+                              <p>そうだよ．きっと，真のラスボスはあの人なんだよ．</p>
+                              <p>ここに説明文を置く．</p>
+                          </div>
+                      </li>
+      -->
+    </ul>
 </div>
 
 <footer>
   <hr>
-  <!--�t�b�^-->
+  <a href="index.html">戻る</a>
+
+  <!--フッタ-->
   <p class="text-center">Copyright 2021 Luna Tsukinashi</p>
 </footer>
 
-<a href="index.html">�߂�</a>
 </body>
 </html>
-

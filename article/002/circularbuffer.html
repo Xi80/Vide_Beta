@@ -1,80 +1,80 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 <head>
-	<link href="../../style/common.css" rel="stylesheet" type="text/css">
-	<meta name="twitter:card" content="summary"/>
-	<meta name="twitter:site" content="@LunaTsukinashi"/>
-	<meta property="og:url" content="vide.c0ntra1l.xyz"/>
-	<meta property="og:title" content="Z80�ł̃����O�o�b�t�@�̎���"/>
-	<meta property="og:description" content="�A�Z���u���Ń����O�o�b�t�@���������܂����D"/> <!--?-->
-	<meta property="og:image" content="http://vide.c0ntra1l.xyz/imgs/vide.jpg"/>
-	<meta charset="shift_jis">
-	<title>�����O�o�b�t�@</title>
+    <link href="../../style/common.css" rel="stylesheet" type="text/css">
+    <meta content="summary" name="twitter:card"/>
+    <meta content="@LunaTsukinashi" name="twitter:site"/>
+    <meta content="vide.c0ntra1l.xyz" property="og:url"/>
+    <meta content="Z80でのリングバッファの実装" property="og:title"/>
+    <meta content="アセンブラでリングバッファを実装しました．" property="og:description"/> <!--?-->
+    <meta content="http://vide.c0ntra1l.xyz/imgs/vide.jpg" property="og:image"/>
+    <meta charset="utf-8">
+    <title>リングバッファ</title>
 </head>
 
 <body>
-<a href="../../archive.html">�߂�</a>
+<a href="../../archive.html">戻る</a>
 
-<div id="top">
-  <h1 class="left">Z80�ł̃����O�o�b�t�@�̎���</h1>
-  <div class="right">
-    <p>Z80�Ń����O�o�b�t�@���������Ă݂܂����D</p>
-    <p class="text-right">�쐬:2021.07.26</p>
-    <p class="text-right">�X�V:2021.07.26</p>
-  </div>
-</div>
+<header>
+    <h1 class="left">Z80でのリングバッファの実装</h1>
+    <div class="right">
+        <p>Z80でリングバッファを実装してみました．</p>
+        <p class="text-right">作成:2021.07.26</p>
+        <p class="text-right">更新:2021.07.26</p>
+    </div>
+</header>
 
-<div id="content" class="article">
-  <hr>
+<div class="article" id="content">
+    <hr>
 
-  <h2>�T�v</h2>
-  <p>�����O�o�b�t�@��Fig1.�̎����悤�ȃ����O��̃o�b�t�@�ł��D</p>
-  <figure class="text-center">
-    <img src="circularbuffer.png" width="320" height="320" alt="test picture">
-    <figcaption>Fig1.�����O�o�b�t�@�̊T�O�}</figcaption>
-  </figure>
-  <p>���ۂ̎����ł͕����I�Ƀ����O��ɔz�u����͕̂s�\�Ȃ̂ŃC���f�b�N�X���o�b�t�@�̃T�C�Y�Ŋ��������܂���g���ăA�N�Z�X���܂��D</p>
-  <p>�������]������ۂɋ��߂�̂͏��Z��̂Ȃ�Z80�ɂ͏d����ƂȂ̂ŁC�u�[�ɓ��B������C���f�b�N�X��0�ɖ߂��v�Ƃ��������Ń����O��ɂ��Ă��܂��D</p>
+    <h2>概要</h2>
+    <p>リングバッファはFig1.の示すようなリング状のバッファです．</p>
+    <figure class="text-center">
+        <img alt="test picture" height="320" src="circularbuffer.png" width="320">
+        <figcaption>Fig1.リングバッファの概念図</figcaption>
+    </figure>
+    <p>実際の実装では物理的にリング状に配置するのは不可能なのでインデックスをバッファのサイズで割ったあまりを使ってアクセスします．</p>
+    <p>割った余りを実際に求めるのは除算器のないZ80には重い作業なので，「端に到達したらインデックスを0に戻す」という処理でリング状にしています．</p>
 
-  <h2>�R�[�h</h2>
-  <pre>
-BUFFER_SIZE	EQU	80H			;�o�b�t�@�[�̃T�C�Y�͂����Ŏw��
+    <h2>コード</h2>
+    <pre>
+BUFFER_SIZE	EQU	80H			;バッファーのサイズはここで指定
 		ORG	5000H
-;�o�b�t�@�[�̏�����
-;����:	�Ȃ�
-;�j��:	�Ȃ�
-INIT_BUFFER:	PUSH	AF			;���W�X�^�̑ޔ�
+;バッファーの初期化
+;引数:	なし
+;破壊:	なし
+INIT_BUFFER:	PUSH	AF			;レジスタの退避
 		PUSH	BC
 		PUSH	DE
 		PUSH	HL
 		;
-		XOR	A			;�|�C���^�̏�����
+		XOR	A			;ポインタの初期化
 		LD	(BUFFER_READ),A
 		LD	(BUFFER_WRITE),A
 		LD	(BUFFER_LENGTH),A
 		;
-		LD	HL,BUFFER		;�o�b�t�@�[�̈�̏�����
+		LD	HL,BUFFER		;バッファー領域の初期化
 		LD	DE,BUFFER+1
 		LD	BC,BUFFER_SIZE-1
 		LD	A,00H
 		LD	(HL),A
 		LDIR
 		;
-		POP	HL			;���W�X�^�̕��A
+		POP	HL			;レジスタの復帰
 		POP	DE
 		POP	BC
 		POP	AF
 		RET
 ;
-;�o�b�t�@�[�ւ̃f�[�^�ǉ�
-;����:		D	�ǉ�����f�[�^
-;�j��:		A,F
-;�Ԃ�l:	Z	T:���s(�󂫂��Ȃ�)
-;			F:����
-SET_BUFFER:	PUSH	BC			;���W�X�^�̑ޔ�
+;バッファーへのデータ追加
+;引数:		D	追加するデータ
+;破壊:		A,F
+;返り値:	Z	T:失敗(空きがない)
+;			F:成功
+SET_BUFFER:	PUSH	BC			;レジスタの退避
 		PUSH	HL
 		;
-		LD	A,(BUFFER_LENGTH)	;�o�b�t�@�[�ɋ󂫂����邩���ׂ�
+		LD	A,(BUFFER_LENGTH)	;バッファーに空きがあるか調べる
 		LD	B,BUFFER_SIZE
 		XOR	B
 		JP	NZ,SET_BUFFER1
@@ -82,13 +82,13 @@ SET_BUFFER:	PUSH	BC			;���W�X�^�̑ޔ�
 		POP	BC
 		RET
 		;
-SET_BUFFER1:	LD	HL,BUFFER		;�A�h���X�Z�o
+SET_BUFFER1:	LD	HL,BUFFER		;アドレス算出
 		LD	B,0
 		LD	A,(BUFFER_WRITE)
 		LD	C,A
 		ADD	HL,BC
 		;
-		LD	(HL),D			;�f�[�^�̒ǉ�
+		LD	(HL),D			;データの追加
 		;
 		LD	A,(BUFFER_LENGTH)	;BUFFER_LENGTH++
 		INC	A
@@ -105,20 +105,20 @@ SET_BUFFER1:	LD	HL,BUFFER		;�A�h���X�Z�o
 		RET	NZ			;BUFFER_SIZE!=BUFFER_WRITE
 		XOR	A			;BUFFER_WRITE=0
 		LD	(BUFFER_WRITE),A
-		INC	A			;Z�t���O������
+		INC	A			;Zフラグを消す
 		OR	A
 		RET
 ;
-;�o�b�t�@�[����̃f�[�^�̎��o��
-;����:		�Ȃ�
-;�j��:		A,F
-;�Ԃ�l:	D	���o�����f�[�^
-;		Z	T	���s(��)
-;			F	����
-GET_BUFFER:	PUSH	BC			;���W�X�^�̑ޔ�
+;バッファーからのデータの取り出し
+;引数:		なし
+;破壊:		A,F
+;返り値:	D	取り出したデータ
+;		Z	T	失敗(空)
+;			F	成功
+GET_BUFFER:	PUSH	BC			;レジスタの退避
 		PUSH	HL
 		;
-		LD	A,(BUFFER_LENGTH)	;�f�[�^�������Ă��邩���ׂ�
+		LD	A,(BUFFER_LENGTH)	;データが入っているか調べる
 		LD	B,0
 		XOR	B
 		JP	NZ,GET_BUFFER1
@@ -126,13 +126,13 @@ GET_BUFFER:	PUSH	BC			;���W�X�^�̑ޔ�
 		POP	BC
 		RET
 		;
-GET_BUFFER1:	LD	HL,BUFFER		;�A�h���X�̎Z�o
+GET_BUFFER1:	LD	HL,BUFFER		;アドレスの算出
 		LD	B,0
 		LD	A,(BUFFER_READ)
 		LD	C,A
 		ADD	HL,BC
 		;
-		LD	D,(HL)			;�f�[�^�̎��o��
+		LD	D,(HL)			;データの取り出し
 		;
 		LD	A,(BUFFER_LENGTH)	;BUFFER_LENGTH--
 		DEC	A
@@ -159,13 +159,13 @@ BUFFER_WRITE:	DEFS	01H
 BUFFER_LENGTH:	DEFS	01H
 BUFFER:		DEFS	80H
   </pre>
-	<p class="text-center">Code1.�����O�o�b�t�@�̃\�[�X�R�[�h</p>
+    <p class="text-center">Code1.リングバッファのソースコード</p>
 
-	<p>���̂悤�ȃR�[�h�ɂȂ�܂��D�R�����g���Q�l�ɂ��Ă��������D</p>
+    <p>このようなコードになります．コメントを参考にしてください．</p>
 
-	<h2>���ۂ̎g�p��</h2>
-	<p>�e�X�g�Ɏg�p�����R�[�h���ȉ��Ɏ����܂��D</p>
-	<pre>
+    <h2>実際の使用例</h2>
+    <p>テストに使用したコードを以下に示します．</p>
+    <pre>
 		ORG	0000H
 MAIN:		CALL	INIT_BUFFER
 		LD	B,4H
@@ -178,19 +178,19 @@ LOOP2:		LD	D,00H
 		DJNZ	LOOP2
 		HALT
 	</pre>
-	<p class="text-center">Code2.�e�X�g�R�[�h</p>
-	<p>4�o�C�g���������񂾂�����5�o�C�g��ǂ݂������Ƃ��Ă��܂��D</p>
-	<p>���̏ꍇ�C5��ڂ̓ǂݏo�����ɂ�Z�t���O��������������00h���Ԃ���邽�߁C�o�b�t�@�[����ł��邱�Ƃ�F���ł��܂��D</p>
+    <p class="text-center">Code2.テストコード</p>
+    <p>4バイトを書き込んだうえで5バイトを読みだそうとしています．</p>
+    <p>この場合，5回目の読み出し時にはZフラグが立ったうえで00hが返されるため，バッファーが空であることを認識できます．</p>
 </div>
 
 <div class="bottom">
 
 </div>
 <footer>
-  <hr>
-  <!--�t�b�^-->
-  <p class="text-center">Copyright 2021 Luna Tsukinashi</p>
+    <hr>
+    <a href="../../archive.html">戻る</a>
+    <!--フッタ-->
+    <p class="text-center">Copyright 2021 Luna Tsukinashi</p>
 </footer>
-<a href="../../archive.html">�߂�</a>
 </body>
 </html>
