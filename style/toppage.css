@@ -14,8 +14,13 @@ span.title-logo {
 }
 
 .layout_home {
-    width:40%;
+    width:50%;
     display: inline-block;
+}
+
+.layout_home img {
+    width: 100%;
+    height: auto;
 }
 
 p.appendix {
