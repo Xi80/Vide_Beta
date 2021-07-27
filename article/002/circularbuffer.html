@@ -162,7 +162,6 @@ BUFFER_WRITE:   DEFS    01H
 BUFFER_LENGTH:  DEFS    01H
 BUFFER:         DEFS    80H
   </pre>
-    <p class="text-center">Code1.リングバッファのソースコード</p>
 
     <p>このようなコードになります．コメントを参考にしてください．</p>
 
@@ -181,7 +180,6 @@ LOOP2:		LD	D,00H
 		DJNZ	LOOP2
 		HALT
 	</pre>
-    <p class="text-center">Code2.テストコード</p>
     <p>4バイトを書き込んだうえで5バイトを読みだそうとしています．</p>
     <p>この場合，5回目の読み出し時にはZフラグが立ったうえで00hが返されるため，バッファーが空であることを認識できます．</p>
 </div>

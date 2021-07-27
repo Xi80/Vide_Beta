@@ -1,11 +1,23 @@
 pre {
     background: rgba(197, 197, 197, 0.84);
     border: 2px dashed #000;
-    margin: auto;
+    margin: 3% 3% 3% 3%;
     padding: 12px;
-    width: 60%;
+    width: 80%;
     tab-size:8;
     -moz-tab-size:8;
-    font-family:monospace!important;
+    font-family:Code;
     white-space:pre;
+    text-align: left;
+}
+
+@font-face {
+    font-family: "Code";
+    src: url("../data/Code.woff2") format("woff2");
+}
+
+h2{
+    font-size:24px;
+    margin-top:1%;
+    margin-bottom:1%;
 }
