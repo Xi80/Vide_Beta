@@ -1,34 +1,33 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 	<head>
-		<!--�X�^�C���V�[�g�̓ǂݍ���-->
+		<!--スタイルシートの読み込み-->
 		<link href="style/common.css" rel="stylesheet" type="text/css">
 		<link href="style/toppage.css" rel="stylesheet" type="text/css">
 
-		<!--Twitter�J�[�h�̐ݒ�-->
+		<!--Twitterカードの設定-->
 		<meta name="twitter:card" content="summary"/>
 		<meta name="twitter:site" content="@LunaTsukinashi"/>
 		<meta property="og:url" content="vide.c0ntra1l.xyz"/>
 		<meta property="og:title" content="Vide"/>
-		<meta property="og:description" content="�d�q�H��/�v���O���~���O"/>
+		<meta property="og:description" content="電子工作/プログラミング"/>
 		<meta property="og:image" content="http://vide.c0ntra1l.xyz/imgs/vide.jpg"/>
 
-		<!--�����R�[�h��SHIFT-JIS(�����ł̉{����z��)-->
-		<meta charset="shift_jis">
+		<meta charset="utf-8">
 
 		<title>Vide</title>
 
 	</head>
 
 	<body>
-	<!--�y�[�W�㕔�̗v�f-->
-	<div id="top">
+	<!--ページ上部の要素-->
+	<header>
 
-			<!--�^�C�g�����S�Ȃ�-->
+			<!--タイトルロゴなど-->
 		<div class="title">
 			<h1 class="title-logo"><span class="title-logo">V</span>ide</h1>
-			<p>�wVide�x�ւ悤�����D</p>
-			<p>�����ł͓d�q�H��/�v���O���~���O����Ɏ�舵���Ă��܂��D</p>
+			<p>『Vide』へようこそ．</p>
+			<p>ここでは電子工作/プログラミングを主に取り扱っています．</p>
 			<p>Sorry! This website is Japanese Only.</p>
 		</div>
 
@@ -38,24 +37,24 @@
 
 			<hr>
 
-		</div>
+	</header>
 
-	<!--���C���̃R���e���c-->
+	<!--メインのコンテンツ-->
 	<div id="content">
 
 		<div class="layout_home">
-			<!--�g�b�v�摜-->
-			<img alt="top image" height="384" src="imgs/top.jpg" width="512">
+			<!--トップ画像-->
+			<img alt="top image" src="imgs/top.jpg" >
 		</div>
 
 		<div class="layout_home">
-			<!--���j���[-->
+			<!--メニュー-->
 
 			<ul class="menu top_menu">
 				<li>
 					<div id="elec">
-						<h3><a href="elec.html">�d�q�H��</a></h3>
-						<p>���삵�����̂̏��̓R�R
+						<h3><a href="elec.html">電子工作</a></h3>
+						<p>制作したものの情報はココ
 						<p>
 						<p class="text-right">LAST UPDATE 2021.07.26
 						<p>
@@ -64,26 +63,26 @@
 
 				<li>
 					<div>
-						<h3><a href="archive.html">�ۊǌ�</a></h3>
-						<p>Z80��MC68000�Ȃǂ̏��D</p>
-						<p>���ɗ����Ȃ��m���Ȃǂ������ɁD</p>
+						<h3><a href="archive.html">保管庫</a></h3>
+						<p>Z80やMC68000などの情報．</p>
+						<p>役に立たない知識などもここに．</p>
 						<p class="text-right">LAST UPDATE 2021.07.26<p>
 					</div>
 				</li>
 
 				<li>
 					<div id="aboutme">
-						<h3><a href="aboutme.html">�Ǘ��l�ɂ���</a></h3>
-						<p>Luna�ɂ��Ă̏��ł��D</p>
+						<h3><a href="aboutme.html">管理人について</a></h3>
+						<p>Lunaについての情報です．</p>
 						<p class="text-right">LAST UPDATE 2021.07.25<p>
 					</div>
 				</li>
 					<!--
 					<li>
 						<div>
-							<h3><a href="aboutme.html">�e�X�g</a></h3>
-							<p>��������D�����ƁC</p>
-							<p>�^�̃��X�{�X�͂��̐l�Ȃ񂾂�D</p>
+							<h3><a href="aboutme.html">テスト</a></h3>
+							<p>そうだよ．きっと，</p>
+							<p>真のラスボスはあの人なんだよ．</p>
 							<p class="text-right">LAST UPDATE 2021.07.25<p>
 						</div>
 					</li>
@@ -95,21 +94,24 @@
 		<div id="bottom">
 			<hr>
 
-			<!--�X�V����-->
-			<h2 class="text-center">�X�V����</h2>
-			<textarea readonly rows="9" style=""></textarea>
+			<!--更新履歴-->
+			<h2 class="text-center">更新履歴</h2>
+			<label>
+				<textarea readonly rows="9" style=""></textarea>
+			</label>
 
-			<!--�ʃt�@�C������X�V������ǂݏo���X�N���v�g-->
+			<!--別ファイルから更新履歴を読み出すスクリプト-->
 			<script type="text/javascript" src="js/loadHistory.js"></script>
 
 		</div>
 
 	<footer>
 		<hr>
-		<!--�t�b�^-->
+		<!--フッタ-->
 		<p class="text-center">Copyright 2021 Luna Tsukinashi</p>
-		<p class="appendix text-center">���̃z�[���y�[�W��1024x768�ȏ�̉𑜓x�ł̉{����z�肵�Đ��삵�Ă��܂��D</p>
-		<p class="appendix text-center">�p�\�R���ȊO�ł̉{���̓f�U�C��������܂��C���炩���߂��������������D</p>
+		<p class="appendix text-center">このホームページは1024x768以上の解像度での閲覧を想定して制作しています．</p>
+		<p class="appendix text-center">パソコン以外での閲覧はデザインが崩れます，あらかじめご了承ください．</p>
+		<p class="appendix text-center">Vide 1.3.0</p>
 	</footer>
 
 	</body>

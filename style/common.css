@@ -1,132 +1,132 @@
 #bottom {
-	margin-bottom: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 #content {
-	margin-top: 20px;
-	width: 100%;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .article h2 {
-	padding: 0.25em 0;
-	position: relative;
+    padding: 0.25em 0;
+    position: relative;
 }
 
 .article h2:after {
-	background: linear-gradient(to right, #ff0000, #ffb2b2);
-	content: "";
-	display: block;
-	height: 4px;
-	width: 20%;
+    background: linear-gradient(to right, #ff0000, #ffb2b2);
+    content: "";
+    display: block;
+    height: 4px;
+    width: 20%;
 }
 
 .content-layout {
-	display: inline-block;
-	margin: auto auto auto 10px;
-	vertical-align: middle;
+    display: inline-block;
+    margin: auto auto auto 10px;
+    vertical-align: middle;
 }
 
 .layout_top {
-	display: inline-block;
-	margin: auto;
-	vertical-align: middle;
+    display: inline-block;
+    margin: auto;
+    vertical-align: middle;
 }
 
 .menu li {
-	background: #FFF0F5;
-	border-left: solid 6px #FF8C00;
-	color: #000;
-	line-height: 2;
-	list-style-type: none;
-	margin-bottom: 5px;
-	padding: 1em;
-	width: 90%;
+    background: #FFF0F5;
+    border-left: solid 6px #FF8C00;
+    color: #000;
+    line-height: 2;
+    list-style-type: none;
+    margin-bottom: 5px;
+    padding: 1em;
+    width: 90%;
 }
 
 .menu ul {
-	padding: 0;
-	position: relative;
-	width: 90%;
+    padding: 0;
+    position: relative;
+    width: 90%;
 }
 
 .text-center, div.title {
-	text-align: center;
+    text-align: center;
 }
 
 .text-right {
-	text-align: right;
+    text-align: right;
 }
 
 @font-face {
-	font-family: "YuGothic M";
-	src: local("Yu Gothic Medium"),
-	local("Yu Gothic");
-	font-weight: 500;
+    font-family: "YuGothic M";
+    src: local("Yu Gothic Medium"),
+    local("Yu Gothic");
+    font-weight: 500;
 }
 
 body {
-	background: #E6E6FA;
-	font-family: "游ゴシック体", YuGothic, "YuGothic M", sans-serif;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20px;
-	width: 75%;
+    background: #E6E6FA;
+    font-family: "游ゴシック体", YuGothic, "YuGothic M", sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 75%;
 }
 
 div.content-layout {
-	height: 160px;
-	vertical-align: center;
-	width: 70%;
+    height: 160px;
+    vertical-align: center;
+    width: 70%;
 }
 
 div.layout_top {
-	font-size: 18px;
-	margin: auto;
-	width: 51%;
+    font-size: 18px;
+    margin: auto;
+    width: 51%;
 }
 
 footer {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 h1 {
-	font-size: 48px;
+    font-size: 48px;
 }
 
 h1.layout_top {
-	font-size: 48px;
-	margin-left: 5%;
-	margin-right: 5%;
-	width: 38%;
+    font-size: 48px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 38%;
 }
 
 h3 {
-	margin-bottom: 0;
-	margin-top: 0;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 p {
-	line-height: 1;
+    line-height: 1;
 }
 
 p.content-layout {
-	font-size: 10px;
+    font-size: 10px;
 }
 
 pre {
-	background: rgba(193, 193, 193, 0.7);
-	border: 2px dashed #000;
-	margin: auto;
-	padding: 12px;
-	width: 60%;
+    background: rgba(193, 193, 193, 0.7);
+    border: 2px dashed #000;
+    margin: auto;
+    padding: 12px;
+    width: 60%;
 }
 
 textarea {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
 }
