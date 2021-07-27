@@ -46,3 +46,11 @@ span.title-logo {
 p.appendix {
     font-size: 8px;
 }
+
+/*更新履歴*/
+textarea {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}

@@ -1,0 +1,10 @@
+pre {
+    background: rgba(197, 197, 197, 0.84);
+    border: 2px dashed #000;
+    margin: auto;
+    padding: 12px;
+    width: 60%;
+    tab-size:8;
+    -moz-tab-size:8;
+    font-family:monospace;
+}

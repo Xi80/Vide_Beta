@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "YuGothic M";
+    src: local("Yu Gothic Medium"),
+    local("Yu Gothic");
+    font-weight: 500;
+}
+
+
 #content {
     margin-top: 20px;
     width: 100%;
@@ -53,13 +61,6 @@
     text-align: right;
 }
 
-@font-face {
-    font-family: "YuGothic M";
-    src: local("Yu Gothic Medium"),
-    local("Yu Gothic");
-    font-weight: 500;
-}
-
 body {
     background: #E6E6FA;
     font-family: "游ゴシック体", YuGothic, "YuGothic M", sans-serif;
@@ -107,19 +108,4 @@ p {
 
 p.content-layout {
     font-size: 10px;
-}
-
-pre {
-    background: rgba(193, 193, 193, 0.7);
-    border: 2px dashed #000;
-    margin: auto;
-    padding: 12px;
-    width: 60%;
-}
-
-textarea {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
 }
