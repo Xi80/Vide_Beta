@@ -29,6 +29,7 @@ span.title-logo {
     margin: 0;
     width: 45%;
     display: inline-block;
+    vertical-align: middle;
 }
 
 /*styleタグからの卒業*/

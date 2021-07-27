@@ -1,7 +1,7 @@
 let xhr = new XMLHttpRequest(),
     method = "GET",
     url = "data/history.txt";
-let box = document.querySelector("#bottom > label >textarea");
+let box = document.querySelector("#content > div:nth-child(3) > label > textarea");
 
 xhr.open(method, url, true);
 xhr.onreadystatechange = function () {
