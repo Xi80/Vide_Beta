@@ -1,13 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 	<head>
-		<link href="style.css" rel="stylesheet" type="text/css">
-
-		<!--フォントを読み込む(タイトル用，内製しても良いかも)-->
-		<link href="https://fonts.googleapis.com" rel="preconnect">
-		<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap&text=Vide"
-			  rel="stylesheet">
+		<!--スタイルシートの読み込み-->
+		<link href="style/common.css" rel="stylesheet" type="text/css">
+		<link href="style/toppage.css" rel="stylesheet" type="text/css">
 
 		<!--Twitterカードの設定-->
 		<meta name="twitter:card" content="summary"/>
@@ -22,27 +18,6 @@
 
 		<title>Vide</title>
 
-		<!--タイトルロゴ用-->
-		<style>
-			h1.title-logo {
-				font-family: 'Cinzel Decorative', cursive;
-				font-size: 72px;
-			}
-
-			span.title-logo {
-				color: #e62000;
-			}
-
-			.layout_home {
-				display: inline-block;
-				vertical-align: center;
-				margin: auto;
-			}
-
-			p.appendix {
-				font-size: 8px;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -76,7 +51,7 @@
 		<div class="layout_home">
 			<!--メニュー-->
 
-			<ul class="menu" style="width:380px;">
+			<ul class="menu top_menu">
 				<li>
 					<div id="elec">
 						<h3><a href="elec.html">電子工作</a></h3>
@@ -89,20 +64,20 @@
 
 				<li>
 					<div>
-							<h3><a href="archive.html">保管庫</a></h3>
-							<p>Z80やMC68000などの情報．</p>
-							<p>役に立たない知識などもここに．</p>
-							<p class="text-right">LAST UPDATE 2021.07.26<p>
-						</div>
-					</li>
+						<h3><a href="archive.html">保管庫</a></h3>
+						<p>Z80やMC68000などの情報．</p>
+						<p>役に立たない知識などもここに．</p>
+						<p class="text-right">LAST UPDATE 2021.07.26<p>
+					</div>
+				</li>
 
-					<li>
-						<div id="aboutme">
-							<h3><a href="aboutme.html">管理人について</a></h3>
-							<p>Lunaについての情報です．</p>
-							<p class="text-right">LAST UPDATE 2021.07.25<p>
-						</div>
-					</li>
+				<li>
+					<div id="aboutme">
+						<h3><a href="aboutme.html">管理人について</a></h3>
+						<p>Lunaについての情報です．</p>
+						<p class="text-right">LAST UPDATE 2021.07.25<p>
+					</div>
+				</li>
 					<!--
 					<li>
 						<div>
@@ -124,6 +99,9 @@
 			<h2 class="text-center">更新履歴</h2>
 			<textarea readonly rows="9" style=""></textarea>
 
+			<!--別ファイルから更新履歴を読み出すスクリプト-->
+			<script type="text/javascript" src="js/loadHistory.js"></script>
+
 		</div>
 
 	<footer>
@@ -133,25 +111,6 @@
 		<p class="appendix text-center">このホームページは1024x768以上の解像度での閲覧を想定して制作しています．</p>
 		<p class="appendix text-center">パソコン以外での閲覧はデザインが崩れます，あらかじめご了承ください．</p>
 	</footer>
-
-		<!--
-			更新履歴を別のところから持ってくるためのスクリプト
-		-->
-
-		<script>
-			let xhr = new XMLHttpRequest(),
-				method = "GET",
-				url = "data/history.txt";
-			let box = document.querySelector("#bottom > textarea");
-
-			xhr.open(method, url, true);
-				xhr.onreadystatechange = function () {
-				if(xhr.readyState === 4 && xhr.status === 200) {
-					box.innerHTML=xhr.responseText;
-				}
-			};
-			xhr.send();
-		</script>
 
 	</body>
 </html>

@@ -1,0 +1,32 @@
+/*
+    トップページ用CSS
+    2021.07.27
+    Luna Tsukinashi
+*/
+
+h1.title-logo {
+    font-family: 'Logo', cursive;
+    font-size: 72px;
+}
+
+span.title-logo {
+    color: #e62000;
+}
+
+.layout_home {
+    width:40%;
+    display: inline-block;
+}
+
+p.appendix {
+    font-size: 8px;
+}
+
+@font-face {
+    font-family: "Logo";
+    src: url("../data/Title.woff2") format("woff2");
+}
+
+.top_menu {
+    width:80%;
+}
