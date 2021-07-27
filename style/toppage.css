@@ -18,6 +18,11 @@ span.title-logo {
     display: inline-block;
 }
 
+.layout_home img {
+    width: 100%;
+    height: auto;
+}
+
 p.appendix {
     font-size: 8px;
 }
