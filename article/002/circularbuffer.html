@@ -41,126 +41,126 @@
 
     <h2>コード</h2>
     <pre>
-BUFFER_SIZE	EQU	80H			;バッファーのサイズはここで指定
-                ORG	5000H
+BUFFER_SIZE     EQU     80H                     ;バッファーのサイズはここで指定
+                ORG     5000H
 ;バッファーの初期化
-;引数:	なし
-;破壊:	なし
-INIT_BUFFER:	PUSH	AF			;レジスタの退避
-                PUSH	BC
-                PUSH	DE
-                PUSH	HL
+;引数:  なし
+;破壊:  なし
+INIT_BUFFER:    PUSH    AF                      ;レジスタの退避
+                PUSH    BC
+                PUSH    DE
+                PUSH    HL
                 ;
-                XOR	A			;ポインタの初期化
-                LD	(BUFFER_READ),A
-                LD	(BUFFER_WRITE),A
-                LD	(BUFFER_LENGTH),A
+                XOR     A                       ;ポインタの初期化
+                LD      (BUFFER_READ),A
+                LD      (BUFFER_WRITE),A
+                LD      (BUFFER_LENGTH),A
                 ;
-                LD	HL,BUFFER		;バッファー領域の初期化
-                LD	DE,BUFFER+1
-                LD	BC,BUFFER_SIZE-1
-                LD	A,00H
-                LD	(HL),A
+                LD      HL,BUFFER               ;バッファー領域の初期化
+                LD      DE,BUFFER+1
+                LD      BC,BUFFER_SIZE-1
+                LD      A,00H
+                LD      (HL),A
                 LDIR
                 ;
-                POP	HL			;レジスタの復帰
-                POP	DE
-                POP	BC
-                POP	AF
+                POP     HL                      ;レジスタの復帰
+                POP     DE
+                POP     BC
+                POP     AF
                 RET
 ;
 ;バッファーへのデータ追加
-;引数:		D	追加するデータ
-;破壊:		A,F
-;返り値:	Z	T:失敗(空きがない)
-;			F:成功
-SET_BUFFER:	PUSH	BC			;レジスタの退避
-                PUSH	HL
+;引数:          D       追加するデータ
+;破壊:          A,F
+;返り値:        Z       T:失敗(空きがない)
+;                       F:成功
+SET_BUFFER:     PUSH    BC                      ;レジスタの退避
+                PUSH    HL
                 ;
-                LD	A,(BUFFER_LENGTH)	;バッファーに空きがあるか調べる
-                LD	B,BUFFER_SIZE
-                XOR	B
-                JP	NZ,SET_BUFFER1
-                POP	HL
-                POP	BC
+                LD      A,(BUFFER_LENGTH)       ;バッファーに空きがあるか調べる
+                LD      B,BUFFER_SIZE
+                XOR     B
+                JP      NZ,SET_BUFFER1
+                POP     HL
+                POP     BC
                 RET
                 ;
-SET_BUFFER1:	LD	HL,BUFFER		;アドレス算出
-                LD	B,0
-                LD	A,(BUFFER_WRITE)
-                LD	C,A
-                ADD	HL,BC
+SET_BUFFER1:    LD      HL,BUFFER               ;アドレス算出
+                LD      B,0
+                LD      A,(BUFFER_WRITE)
+                LD      C,A
+                ADD     HL,BC
                 ;
-                LD	(HL),D			;データの追加
+                LD      (HL),D                  ;データの追加
                 ;
-                LD	A,(BUFFER_LENGTH)	;BUFFER_LENGTH++
-                INC	A
-                LD	(BUFFER_LENGTH),A
+                LD      A,(BUFFER_LENGTH)       ;BUFFER_LENGTH++
+                INC     A
+                LD      (BUFFER_LENGTH),A
                 ;
-                INC	C			;BUFFER_WRITE++
-                LD	A,C
-                LD	(BUFFER_WRITE),A
+                INC     C                       ;BUFFER_WRITE++
+                LD      A,C
+                LD      (BUFFER_WRITE),A
                 ;
-                LD	B,BUFFER_SIZE		;BUFFER_SIZE==BUFFER_WRITE?
-                XOR	B
-                POP	HL
-                POP	BC
-                RET	NZ			;BUFFER_SIZE!=BUFFER_WRITE
-                XOR	A			;BUFFER_WRITE=0
-                LD	(BUFFER_WRITE),A
-                INC	A			;Zフラグを消す
-                OR	A
+                LD      B,BUFFER_SIZE           ;BUFFER_SIZE==BUFFER_WRITE?
+                XOR     B
+                POP     HL
+                POP     BC
+                RET     NZ                      ;BUFFER_SIZE!=BUFFER_WRITE
+                XOR     A                       ;BUFFER_WRITE=0
+                LD      (BUFFER_WRITE),A
+                INC     A                       ;Zフラグを消す
+                OR      A
                 RET
 ;
 ;バッファーからのデータの取り出し
-;引数:		なし
-;破壊:		A,F
-;返り値:	D	取り出したデータ
-;		Z	T	失敗(空)
-;			F	成功
-GET_BUFFER:	PUSH	BC			;レジスタの退避
-                PUSH	HL
+;引数:          なし
+;破壊:          A,F
+;返り値:        D       取り出したデータ
+;               Z       T       失敗(空)
+;                       F       成功
+GET_BUFFER:     PUSH    BC                      ;レジスタの退避
+                PUSH    HL
                 ;
-                LD	A,(BUFFER_LENGTH)	;データが入っているか調べる
-                LD	B,0
-                XOR	B
-                JP	NZ,GET_BUFFER1
-                POP	HL
-                POP	BC
+                LD      A,(BUFFER_LENGTH)       ;データが入っているか調べる
+                LD      B,0
+                XOR     B
+                JP      NZ,GET_BUFFER1
+                POP     HL
+                POP     BC
                 RET
                 ;
-GET_BUFFER1:	LD	HL,BUFFER		;アドレスの算出
-                LD	B,0
-                LD	A,(BUFFER_READ)
-                LD	C,A
-                ADD	HL,BC
+GET_BUFFER1:    LD      HL,BUFFER               ;アドレスの算出
+                LD      B,0
+                LD      A,(BUFFER_READ)
+                LD      C,A
+                ADD     HL,BC
                 ;
-                LD	D,(HL)			;データの取り出し
+                LD      D,(HL)                  ;データの取り出し
                 ;
-                LD	A,(BUFFER_LENGTH)	;BUFFER_LENGTH--
-                DEC	A
-                LD	(BUFFER_LENGTH),A
+                LD      A,(BUFFER_LENGTH)       ;BUFFER_LENGTH--
+                DEC     A
+                LD      (BUFFER_LENGTH),A
                 ;
-                INC	C			;BUFFER_READ++
-                LD	A,C
-                LD	(BUFFER_READ),A
+                INC     C                       ;BUFFER_READ++
+                LD      A,C
+                LD      (BUFFER_READ),A
                 ;
-                LD	B,BUFFER_SIZE		;BUFFER_SIZE==BUFFER_READ?
-                XOR	B
-                POP	HL
-                POP	BC
-                RET	NZ			;BUFFER_SIZE!=BUFFER_READ
-                XOR	A			;BUFFER_READ=0
-                LD	(BUFFER_READ),A
-                INC	A
-                OR	A
+                LD      B,BUFFER_SIZE           ;BUFFER_SIZE==BUFFER_READ?
+                XOR     B
+                POP     HL
+                POP     BC
+                RET     NZ                      ;BUFFER_SIZE!=BUFFER_READ
+                XOR     A                       ;BUFFER_READ=0
+                LD      (BUFFER_READ),A
+                INC     A
+                OR      A
                 RET
 ;RAM AREA
-                ORG	9000H
-BUFFER_READ:	DEFS	01H
-BUFFER_WRITE:	DEFS	01H
-BUFFER_LENGTH:	DEFS	01H
-BUFFER:		DEFS	80H
+                ORG     9000H
+BUFFER_READ:    DEFS    01H
+BUFFER_WRITE:   DEFS    01H
+BUFFER_LENGTH:  DEFS    01H
+BUFFER:         DEFS    80H
   </pre>
     <p class="text-center">Code1.リングバッファのソースコード</p>
 

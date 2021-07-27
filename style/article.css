@@ -6,6 +6,6 @@ pre {
     width: 60%;
     tab-size:8;
     -moz-tab-size:8;
-    font-family:monospace;
+    font-family:monospace!important;
     white-space:pre;
 }
